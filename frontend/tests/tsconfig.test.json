@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // This need to be different, the NextJS uses different one
+    "jsx": "react-jsx"
+  },
+}

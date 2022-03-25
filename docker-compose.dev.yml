@@ -22,7 +22,6 @@ services:
     ports:
       - "5000:3000"
     depends_on:
-      #- node_modules
       - db
   frontend:
     build:
@@ -36,5 +35,4 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      #- node_modules
       - db

@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=main
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  #backend:
+  #  build:
+  #    dockerfile: Dockerfile
+  #    context: ./backend
+  #  command: 
+  #    - npm run prisma generate
+  #    - npm run start:dev
+  #  volumes:
+  #    - ./backend:/app
+  #    - /app/node_modules
+  #  ports:
+  #    - "5000:3000"
+  #  depends_on:
+  #    - db
+  #  environment:
+  #   - postgresql://postgres:postgres@db:5432/main
+  #frontend:
+  #  build:
+  #    dockerfile: Dockerfile
+  #    context: ./frontend
+  #  command: npm run dev
+  #  volumes:
+  #    - ./frontend:/app
+  #    - /app/node_modules
+  #  ports:
+  #    - "3000:3000"
+  #  depends_on:
+  #    - db

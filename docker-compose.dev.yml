@@ -1,10 +1,6 @@
 version: "3.8"
 
 services:
-  node:
-    image: node:16
-    volumes:
-      - shared-node_modules:/backend/node_modules
   db:
     image: postgres
     volumes:
@@ -21,13 +17,24 @@ services:
       context: ./backend
     command: npm run start:dev
     volumes:
-      - /backend/node_modules # Exclude node_modules from host.
-      - shared-node_modules:/backend/node_modules
-      - ./backend:/backend
+      - ./backend:/app
+      - /app/node_modules
     ports:
       - "5000:3000"
     depends_on:
+      #- node_modules
       - db
-
-volumes:
-  shared-node_modules:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    command: npm run dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    depends_on:
+      #- node_modules
+      - db

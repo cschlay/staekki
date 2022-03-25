@@ -1,7 +1,6 @@
 FROM node:16
 
-RUN mkdir /backend
-WORKDIR /backend
+WORKDIR /app
 
 COPY package.json .
 RUN npm i -g @nestjs/cli

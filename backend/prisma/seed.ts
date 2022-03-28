@@ -1,3 +1,4 @@
+import { EcosystemEnum } from "../src/enums/EcosystemEnum";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -10,7 +11,7 @@ const main = async () => {
 const seedNpm = async () => {
   await prisma.ecosystem.create({
     data: {
-      name: "NPM",
+      name: EcosystemEnum.NPM,
     },
   });
 };
@@ -18,7 +19,7 @@ const seedNpm = async () => {
 const seedPython = async () => {
   await prisma.ecosystem.create({
     data: {
-      name: "Python",
+      name: EcosystemEnum.Python,
     },
   });
 };

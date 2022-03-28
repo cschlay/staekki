@@ -35,6 +35,7 @@ CREATE TABLE "TechOnProject" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Ecosystem_name_key" ON "Ecosystem"("name");
+CREATE UNIQUE INDEX "Project_name_key" ON "Project"("name");
 
 -- AddForeignKey
 ALTER TABLE "Project" ADD CONSTRAINT "Project_ecosystemId_fkey" FOREIGN KEY ("ecosystemId") REFERENCES "Ecosystem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

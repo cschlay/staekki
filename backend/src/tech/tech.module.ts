@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { TechService } from './tech.service';
+import { Module } from "@nestjs/common";
+import { TechService } from "./tech.service";
 
 @Module({
-  providers: [TechService]
+  providers: [TechService],
 })
 export class TechModule {}

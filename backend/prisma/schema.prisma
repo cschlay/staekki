@@ -19,7 +19,7 @@ model Ecosystem {
 
 model Project {
   id          String          @id @default(uuid()) @db.Uuid
-  name        String
+  name        String          @unique
   ecosystem   Ecosystem       @relation(fields: [ecosystemId], references: [id])
   ecosystemId Int
   techs       TechOnProject[]

@@ -2,6 +2,9 @@ name: Test
 
 on: [push]
 
+env:
+  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/main
+
 jobs:
   test:
     services:

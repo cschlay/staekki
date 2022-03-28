@@ -22,7 +22,8 @@ jobs:
         with:
           node-version: "16.x"
           cache: "npm"
+          cache-dependency-path: backend/package-lock.json
       - run: npm ci
-        working-directory: "./backend"
+        working-directory: backend
       - run: npm run test
-        working-directory: "./backend"
+        working-directory: backend

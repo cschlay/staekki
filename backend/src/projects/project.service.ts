@@ -9,23 +9,6 @@ import { Paginated } from "../utils/Paginated";
 export class ProjectService {
   constructor(private db: Database) {}
 
-  async listProjectsAsync(): Promise<Paginated<ProjectDetailDto>> {
-    const results = await this.db.project.findMany({
-      include: {
-        ecosystem: true,
-      },
-    });
-    const data: ProjectDetailDto[] = results.map(
-      (instance) =>
-        new ProjectDetailDto({
-          id: instance.id,
-          name: instance.name,
-          ecosystem: instance.ecosystem.name as EcosystemEnum,
-        })
-    );
-    return new Paginated<ProjectDetailDto>(data);
-  }
-
   async createProjectAsync(data: ProjectCreateDto): Promise<ProjectDetailDto> {
     const ecosystem = await this.db.ecosystem.findUnique({
       where: {
@@ -58,6 +41,38 @@ export class ProjectService {
     });
   }
 
+  async deleteByIdAsync(id: string): Promise<void> {
+    if (!id) {
+      throw new Error("The project 'id' must be defined!");
+    }
+    try {
+      await this.db.project.delete({
+        where: {
+          id: id,
+        },
+      });
+    } catch (e) {
+      // It is likely already deleted.
+    }
+  }
+
+  async findByIdAsync(id: string): Promise<ProjectDetailDto> {
+    const project = await this.db.project.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        ecosystem: true,
+      },
+    });
+
+    return new ProjectDetailDto({
+      id: project.id,
+      name: project.name,
+      ecosystem: project.ecosystem.name as EcosystemEnum,
+    });
+  }
+
   async linkTechAsync(projectId: string, techId: number) {
     this.db.techOnProject.create({
       data: {
@@ -65,5 +80,22 @@ export class ProjectService {
         projectId: projectId,
       },
     });
+  }
+
+  async listProjectsAsync(): Promise<Paginated<ProjectDetailDto>> {
+    const results = await this.db.project.findMany({
+      include: {
+        ecosystem: true,
+      },
+    });
+    const data: ProjectDetailDto[] = results.map(
+      (instance) =>
+        new ProjectDetailDto({
+          id: instance.id,
+          name: instance.name,
+          ecosystem: instance.ecosystem.name as EcosystemEnum,
+        })
+    );
+    return new Paginated<ProjectDetailDto>(data);
   }
 }

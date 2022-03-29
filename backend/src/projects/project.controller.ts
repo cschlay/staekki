@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -16,19 +17,27 @@ import { TechLinkCreateDto } from "./dtos/TechLinkCreate.dto";
 export class ProjectController {
   constructor(private service: ProjectService) {}
 
+  @Post()
+  async createAsync(@Body() data: ProjectCreateDto): Promise<ProjectDetailDto> {
+    return this.service.createProjectAsync(data);
+  }
+
   @Get()
   async listAsync(): Promise<Paginated<ProjectDetailDto>> {
     return this.service.listProjectsAsync();
   }
 
-  /*@Get(":id")
-  async retrieveAsync(@Param() params): Promise<ProjectDetailDto> {
-    return this.service.retrieveProjectAsync();
-  }*/
+  @Get(":id")
+  async retrieveAsync(
+    @Param("id", ParseUUIDPipe) id: string
+  ): Promise<ProjectDetailDto> {
+    return this.service.findByIdAsync(id);
+  }
 
-  @Post()
-  async createAsync(@Body() data: ProjectCreateDto): Promise<ProjectDetailDto> {
-    return this.service.createProjectAsync(data);
+  @Delete(":id")
+  async deleteAsync(@Param("id", ParseUUIDPipe) id: string): Promise<{}> {
+    await this.service.deleteByIdAsync(id);
+    return {};
   }
 
   @Post(":id/techs")

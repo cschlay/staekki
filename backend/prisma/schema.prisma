@@ -28,9 +28,15 @@ model Project {
 model Tech {
   id          Int             @id @default(autoincrement())
   name        String
+  packageName String?
+  website     String?
   ecosystem   Ecosystem       @relation(fields: [ecosystemId], references: [id])
   ecosystemId Int
   projects    TechOnProject[]
+  pairsTail   TechPair[]      @relation("pairs-tail")
+  pairsHead   TechPair[]      @relation("pairs-head")
+
+  @@unique([name, ecosystemId])
 }
 
 model TechOnProject {
@@ -40,4 +46,12 @@ model TechOnProject {
   projectId String  @db.Uuid
 
   @@id([techId, projectId])
+}
+
+model TechPair {
+  id         Int  @id @default(autoincrement())
+  techTail   Tech @relation("pairs-tail", fields: [techTailId], references: [id])
+  techTailId Int
+  techHead   Tech @relation("pairs-head", fields: [techHeadId], references: [id])
+  techHeadId Int
 }

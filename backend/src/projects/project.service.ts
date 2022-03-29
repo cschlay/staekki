@@ -57,4 +57,13 @@ export class ProjectService {
       ecosystem: ecosystem.name as EcosystemEnum,
     });
   }
+
+  async linkTechAsync(projectId: string, techId: number) {
+    this.db.techOnProject.create({
+      data: {
+        techId: techId,
+        projectId: projectId,
+      },
+    });
+  }
 }

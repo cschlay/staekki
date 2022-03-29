@@ -19,10 +19,11 @@ CREATE TABLE "Project" (
 CREATE TABLE "Tech" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "packageName" TEXT,
+    "website" TEXT,
     "ecosystemId" INTEGER NOT NULL,
 
-    CONSTRAINT "Tech_pkey" PRIMARY KEY ("id"),
-    UNIQUE("name", "ecosystemId")
+    CONSTRAINT "Tech_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -35,7 +36,12 @@ CREATE TABLE "TechOnProject" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Ecosystem_name_key" ON "Ecosystem"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Project_name_key" ON "Project"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Tech_name_ecosystemId_key" ON "Tech"("name", "ecosystemId");
 
 -- AddForeignKey
 ALTER TABLE "Project" ADD CONSTRAINT "Project_ecosystemId_fkey" FOREIGN KEY ("ecosystemId") REFERENCES "Ecosystem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

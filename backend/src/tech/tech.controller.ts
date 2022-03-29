@@ -1,13 +1,15 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { TechCreateDto } from "./dtos/TechCreate.dto";
-import { TechDetailDto } from "./dtos/TechDetail.dto";
+import { Controller, Get, ParseUUIDPipe, Query } from "@nestjs/common";
+import { TechService } from "./tech.service";
+import { Tech } from "@prisma/client";
 
-@Controller("tech")
+@Controller("techs")
 export class TechController {
-  @Post()
-  addTech(@Body() request: TechCreateDto): TechDetailDto {
-    return new TechDetailDto({
-      name: request.name,
-    });
+  constructor(private service: TechService) {}
+
+  @Get()
+  async listAsync(
+    @Query("project", ParseUUIDPipe) projectId: string
+  ): Promise<Tech[]> {
+    return this.service.listTechAsync(projectId);
   }
 }

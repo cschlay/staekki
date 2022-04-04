@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
       args: "-e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=main -p 5432:5432"
   end
 
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus = 2
+  end
+
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -

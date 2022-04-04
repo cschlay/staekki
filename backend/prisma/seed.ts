@@ -15,7 +15,7 @@ const seedNpm = async () => {
     },
   });
   const ecosystemId: number = ecosystem.id;
-  const techs = await prisma.tech.createMany({
+  await prisma.tech.createMany({
     data: [
       {
         name: "React",
@@ -38,6 +38,7 @@ const seedNpm = async () => {
     ],
   });
 
+  const techs = await prisma.tech.findMany();
   await prisma.techPair.createMany({
     data: [
       {

@@ -19,5 +19,6 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y nodejs
     npm i -g @nestjs/cli
     npm i -g prisma
+    npm i -g ts-node
   SHELL
 end

@@ -2,6 +2,8 @@
 
 Monorepo for stack recommender, could be customized to recommend e.g. shopping items.
 
+## Docker and Native
+
 ```bash
 docker-compose up
 ```
@@ -23,3 +25,8 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## Vagrant
+
+Ensure that you have vagrant installed and run `vagrant up`, then `vagrant ssh` and do your stuff.
+You can run the scripts found in ./sh/ directory.

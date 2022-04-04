@@ -1,6 +1,6 @@
 import { Controller, Get, ParseUUIDPipe, Query } from "@nestjs/common";
-import { TechService } from "./tech.service";
 import { Tech } from "@prisma/client";
+import { TechService } from "./tech.service";
 
 @Controller("techs")
 export class TechController {

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Vagrant Development" type="CompoundRunConfigurationType">
+    <toRun name="Vagrant Backend Start (PowerShell)" type="ShConfigurationType" />
+    <toRun name="Vagrant Frontend Start (PowerShell)" type="ShConfigurationType" />
+    <toRun name="Vagrant Shell" type="ShConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

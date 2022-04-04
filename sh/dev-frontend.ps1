@@ -1,0 +1,1 @@
+vagrant ssh -- -t 'cd app/frontend; npm run dev;'

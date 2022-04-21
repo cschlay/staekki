@@ -10,7 +10,29 @@ export class TechService {
    * Returns the recommended technologies by some criteria.
    * @param projectId
    */
-  async findSuggestions(projectId: string) {}
+  async findSuggestions(projectId: string): Promise<Tech[]> {
+    const techUsed = await this.db.tech.findMany({
+      where: {
+        projects: {
+          some: {
+            projectId: projectId,
+          },
+        },
+      },
+    });
+    const techUsedIds = techUsed.map(({ id }) => id);
+    return await this.db.tech.findMany({
+      where: {
+        pairsHead: {
+          some: {
+            techTailId: {
+              in: techUsedIds,
+            },
+          },
+        },
+      },
+    });
+  }
 
   /**
    * Lists the technologies by project.

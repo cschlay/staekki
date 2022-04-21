@@ -19,6 +19,7 @@ async function bootstrap() {
   await prismaService.enableShutdownHooks(app);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.enableCors();
   await app.listen(5000);
 }
 bootstrap();

@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
 import { Database } from "./services/database.service";
+import { Module } from "@nestjs/common";
 import { ProjectModule } from "./projects/project.module";
 import { TechModule } from "./tech/tech.module";
 

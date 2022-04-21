@@ -28,5 +28,4 @@ module.exports = {
       tsconfig: "<rootDir>/tests/tsconfig.test.json",
     },
   },
-  modulePathIgnorePatterns: ["<rootDir>/cypress/"],
 };

@@ -1,4 +1,10 @@
-import { Controller, Get, ParseUUIDPipe, Query } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  ParseBoolPipe,
+  ParseUUIDPipe,
+  Query,
+} from "@nestjs/common";
 import { Tech } from "@prisma/client";
 import { TechService } from "./tech.service";
 
@@ -8,8 +14,12 @@ export class TechController {
 
   @Get()
   async listAsync(
-    @Query("project", ParseUUIDPipe) projectId: string
+    @Query("project", ParseUUIDPipe) projectId: string,
+    @Query("suggestions", ParseBoolPipe) suggestions?: boolean
   ): Promise<Tech[]> {
+    if (suggestions) {
+      return this.service.findSuggestions(projectId);
+    }
     return this.service.listTechAsync(projectId);
   }
 }

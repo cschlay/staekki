@@ -74,12 +74,14 @@ export class ProjectService {
   }
 
   async linkTechAsync(projectId: string, techId: number) {
-    this.db.techOnProject.create({
+    const x = await this.db.techOnProject.create({
       data: {
         techId: techId,
         projectId: projectId,
       },
     });
+
+    console.log(x);
   }
 
   async listProjectsAsync(): Promise<Paginated<ProjectDetailDto>> {

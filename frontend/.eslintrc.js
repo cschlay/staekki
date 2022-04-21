@@ -2,10 +2,12 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint/eslint-plugin"],
   extends: [
-    "next",
-    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
+    "plugin:storybook/recommended",
+    "prettier",
   ],
   env: {
     browser: true,

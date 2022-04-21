@@ -22,8 +22,6 @@ Vagrant.configure("2") do |config|
     apt-get update
     curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
     sudo apt-get install -y nodejs
-    npm i -g @nestjs/cli
-    npm i -g prisma
-    npm i -g ts-node
+    npm install -g yarn
   SHELL
 end
